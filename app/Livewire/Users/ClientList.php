@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithPagination;
 
-class UserList extends Component
+class ClientList extends Component
 {
     use WithPagination;
 
