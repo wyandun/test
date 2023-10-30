@@ -90,6 +90,20 @@ class UserList extends Component
         $this->invoice_id = null;
         session()->flash('message', 'Invoice Created Successfully.');
         $this->resetInputFields();
+        $user = User::findOrFail($validatedData['user_id']);
+        $product = Product::findOrFail($validatedData['product_id']);
+        $price= $validatedData['price'];
+        $content = [
+            'subject' => 'Invoice created',
+            'body' => 'The invoice was created',
+            'product'=> $product->name,
+            'user' => $user->name,
+            'price'=> $price,
+        ];
+
+        Mail::to($user->email)->send(new SampleMail($content));
+
+        return "Email has been sent.";
     }
 
     /**

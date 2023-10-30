@@ -8,12 +8,12 @@
     <form
         class="w-full max-w-sm p-4 mt-4 mb-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
         <input type="hidden" wire:model="invoice_id">
-        <x-forms.input type="text" label="Name" name="name" value="{{ old('name') }}" placeholder="Enter Name"
+        <x-forms.select label="Product" name="product_id" value="{{ old('product_id') }}" data="{{$products}}" 
             required />
-        <x-forms.input type="email" label="Email" name="email" value="{{ old('email') }}" placeholder="Enter Email"
+        <x-forms.select label="Email" name="email" value="{{ old('user_id') }}" data="{{$users}}" 
             required />
-        <x-forms.input type="password" label="Password" name="password" value="{{ old('password') }}"
-            placeholder="Enter Password" required />
+        <x-forms.input type="text" label="Price" name="price" value="{{ old('price') }}"
+            placeholder="Enter Price" required />
         <button wire:click.prevent="save()"
             class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
         <button wire:click.prevent="cancel()"
@@ -27,10 +27,13 @@
                         No.
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        User
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Email
+                        Product
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -41,23 +44,25 @@
                 @php
                     $i = (request()->input('page', 1) - 1) * 15;
                 @endphp
-                @foreach ($users as $key => $user)
+                @foreach ($invoices as $key => $invoice)
                     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{-- {{ $user->id }} --}}
                             {{ ++$i }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->name }}
+                            {{ $invoice->user->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->email }}
+                            {{ $invoice->product->name }}
                         </td>
                         <td class="px-6 py-4">
-                            <button wire:click="edit({{ $user->id }})"
+                            {{ $invoice->price }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <button wire:click="edit({{ $invoice->id }})"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
-                            <button wire:click="delete({{ $user->id }})"
+                            <button wire:click="delete({{ $invoice->id }})"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
                         </td>
                     </tr>
@@ -65,7 +70,7 @@
             </tbody>
         </table>
         <div class="p-3">
-            {{ $users->links() }}
+            {{ $invoices->links() }}
         </div>
     </div>
 </div>
