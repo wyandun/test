@@ -18,10 +18,10 @@ class Invoice extends Model
 
     public function product(): HasOne
     {
-        return $this->hasOne(Products::class);
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
     public function user(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }
