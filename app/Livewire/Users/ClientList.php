@@ -21,7 +21,7 @@ class ClientList extends Component
      */
     public function render()
     {
-        return view('livewire.users.user-list',[
+        return view('livewire.users.client-list',[
             'users' => User::paginate(15)
         ]);
     }

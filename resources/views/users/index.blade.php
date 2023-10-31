@@ -1,1 +1,1 @@
-@livewire('users.user-list')
+@livewire('users.client-list')
