@@ -15,10 +15,26 @@
     <form
         class="w-full max-w-sm p-4 mt-4 mb-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
         <input type="hidden" wire:model="invoice_id">
-        <x-forms.select label="Product" name="product_id" value="{{ old('product_id') }}" data="{{$products}}" 
-            required />
-        <x-forms.select label="User" name="user_id" value="{{ old('user_id') }}" data="{{$users}}" 
-            required />
+        <div class="mb-6">
+            <label for="product_id"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product</label>
+            <select name="product_id" class="form-control" style="width: 100%">
+                    @foreach($products as $value)
+                    <option value="{{$value->id}}">{{$value->name}}</option>
+                    @endforeach
+            </select>
+            
+        </div>
+        <div class="mb-6">
+            <label for="user_id"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client</label>
+            <select name="user_id" class="form-control" style="width: 100%">
+                    @foreach($users as $value)
+                    <option value="{{$value->id}}">{{$value->name}}</option>
+                    @endforeach
+            </select>
+            
+        </div>
         <x-forms.input type="text" label="Price" name="price" value="{{ old('price') }}"
             placeholder="Enter Price" required />
         <button wire:click.prevent="save()"
