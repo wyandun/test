@@ -1,4 +1,11 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 <div>
+    
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session('message') }}
@@ -10,7 +17,7 @@
         <input type="hidden" wire:model="invoice_id">
         <x-forms.select label="Product" name="product_id" value="{{ old('product_id') }}" data="{{$products}}" 
             required />
-        <x-forms.select label="Email" name="email" value="{{ old('user_id') }}" data="{{$users}}" 
+        <x-forms.select label="User" name="user_id" value="{{ old('user_id') }}" data="{{$users}}" 
             required />
         <x-forms.input type="text" label="Price" name="price" value="{{ old('price') }}"
             placeholder="Enter Price" required />
@@ -74,3 +81,4 @@
         </div>
     </div>
 </div>
+</x-app-layout>

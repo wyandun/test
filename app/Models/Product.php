@@ -11,6 +11,11 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'price'
+    ];
+
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoices::class);

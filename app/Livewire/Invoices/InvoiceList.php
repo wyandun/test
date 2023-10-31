@@ -3,10 +3,12 @@
 namespace App\Livewire\Invoices;
 
 use Livewire\Component;
-use App\Models\Invoce;
+use App\Models\Invoice;
+use App\Models\Product;
+use App\Models\User;
 use Livewire\WithPagination;
 
-class UserList extends Component
+class InvoiceList extends Component
 {
     use WithPagination;
 
@@ -21,7 +23,9 @@ class UserList extends Component
     public function render()
     {
         return view('livewire.invoices.invoice-list',[
-            'invoices' => Invoice::paginate(15)
+            'invoices' => Invoice::paginate(15),
+            'products' => Product::all(),
+            'users' => User::all()
         ]);
     }
 
